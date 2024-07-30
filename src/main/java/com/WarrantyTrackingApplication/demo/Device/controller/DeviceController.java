@@ -22,41 +22,36 @@ public class DeviceController {
     private final IDeviceService deviceService;
     private final IModelMapperService modelMapper;
 
-
-
+    // Get Device by ID and return as DeviceResponse
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<DeviceResponse> get(@PathVariable ("id") Long id){
-        Device device =this.deviceService.get(id);
-        return ResultHelper.success(this.modelMapper.forResponse().map(device , DeviceResponse.class));
+    public ResultData<DeviceResponse> get(@PathVariable("id") Long id) {
+        Device device = this.deviceService.get(id);
+        return ResultHelper.success(this.modelMapper.forResponse().map(device, DeviceResponse.class));
     }
 
-
-
-
-
+    // Save a new Device and return the created DeviceResponse
     @PostMapping("/created")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResultData<DeviceResponse> save(@Valid @RequestBody DeviceSaveRequest deviceSaveRequest){
-        Device saveDevice = this.modelMapper.forRequest().map(deviceSaveRequest , Device.class);
+    public ResultData<DeviceResponse> save(@Valid @RequestBody DeviceSaveRequest deviceSaveRequest) {
+        Device saveDevice = this.modelMapper.forRequest().map(deviceSaveRequest, Device.class);
         this.deviceService.save(saveDevice);
-        return ResultHelper.created(this.modelMapper.forResponse().map(saveDevice,DeviceResponse.class));
+        return ResultHelper.created(this.modelMapper.forResponse().map(saveDevice, DeviceResponse.class));
     }
 
-
-
+    // Update an existing Device and return the updated DeviceResponse
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResultData<DeviceResponse> update(@PathVariable Long id, @Valid @RequestBody DeviceUpdateRequest deviceUpdateRequest){
-        Device updateDevice = this.modelMapper.forRequest().map(deviceUpdateRequest , Device.class);
+    public ResultData<DeviceResponse> update(@PathVariable Long id, @Valid @RequestBody DeviceUpdateRequest deviceUpdateRequest) {
+        Device updateDevice = this.modelMapper.forRequest().map(deviceUpdateRequest, Device.class);
         this.deviceService.update(updateDevice);
         return ResultHelper.success(this.modelMapper.forResponse().map(updateDevice, DeviceResponse.class));
     }
 
-
+    // Delete a Device by ID
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Result delete(@PathVariable ("id") Long id){
+    public Result delete(@PathVariable("id") Long id) {
         this.deviceService.delete(id);
         return ResultHelper.Ok();
     }

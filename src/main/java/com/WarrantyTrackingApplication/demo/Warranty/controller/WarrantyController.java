@@ -14,87 +14,41 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WarrantyController {
 
+    @Autowired
+    private WarrantyService warrantyService;
 
-
-        @Autowired
-        private WarrantyService warrantyService;
-
-        @PutMapping("/{id}/status")
-        public ResponseEntity<String> updateWarrantyStatus(@PathVariable Long id) {
-            try {
-                warrantyService.updateWarrantyStatus(id);
-                return ResponseEntity.ok("Garanti durumu güncellendi.");
-            } catch (RuntimeException e) {
-                return ResponseEntity.status(404).body("Garanti bulunamadı: " + e.getMessage());
-            }
+    // Update the status of a Warranty by ID
+    @PutMapping("/{id}/status")
+    public ResponseEntity<String> updateWarrantyStatus(@PathVariable Long id) {
+        try {
+            warrantyService.updateWarrantyStatus(id);
+            return ResponseEntity.ok("Warranty status updated.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body("Warranty not found: " + e.getMessage());
         }
+    }
 
-        @PostMapping
-        public ResponseEntity<Warranty> createWarranty(@RequestBody Warranty warranty) {
-            Warranty savedWarranty = warrantyService.saveWarranty(warranty);
-            return ResponseEntity.ok(savedWarranty);
+    // Create a new Warranty
+    @PostMapping
+    public ResponseEntity<Warranty> createWarranty(@RequestBody Warranty warranty) {
+        Warranty savedWarranty = warrantyService.saveWarranty(warranty);
+        return ResponseEntity.ok(savedWarranty);
+    }
+
+    // Get a list of all Warranties
+    @GetMapping
+    public ResponseEntity<List<Warranty>> getAllWarranties() {
+        return ResponseEntity.ok(warrantyService.getAllWarranties());
+    }
+
+    // Get a Warranty by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Warranty> getWarrantyById(@PathVariable Long id) {
+        try {
+            Warranty warranty = warrantyService.getWarrantyById(id);
+            return ResponseEntity.ok(warranty);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(null);
         }
-
-        @GetMapping
-        public ResponseEntity<List<Warranty>> getAllWarranties() {
-            return ResponseEntity.ok(warrantyService.getAllWarranties());
-        }
-
-        @GetMapping("/{id}")
-        public ResponseEntity<Warranty> getWarrantyById(@PathVariable Long id) {
-            try {
-                Warranty warranty = warrantyService.getWarrantyById(id);
-                return ResponseEntity.ok(warranty);
-            } catch (RuntimeException e) {
-                return ResponseEntity.status(404).body(null);
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 }
