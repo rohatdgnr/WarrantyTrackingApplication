@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garanti Takip Uygulaması</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <h1>Garanti Takip</h1>
+        <ul>
+            <li><a href="#">Ana Sayfa</a></li>
+            <li><a href="#">Garanti Ekle</a></li>
+            <li><a href="#">Hakkında</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        <h2>Garanti Takip Uygulaması</h2>
+        <p>Garanti bilgilerinizi kolayca takip edin.</p>
+    </section>
+    <section class="warranty-list">
+        <h2>Garanti Kayıtları</h2>
+        <ul id="warrantyList">
+            <!-- Garanti kayıtları burada listelenecek -->
+        </ul>
+    </section>
+    <section class="add-device">
+        <h2>Cihaz Ekle</h2>
+        <form id="addDeviceForm">
+            <label for="deviceBrand">Cihaz Markası:</label>
+            <input type="text" id="deviceBrand" name="deviceBrand" required>
+            <label for="serialNumber">Seri Numarası:</label>
+            <input type="text" id="serialNumber" name="serialNumber" required>
+            <label for="modelName">Model:</label>
+            <input type="text" id="modelName" name="modelName" required>
+            <label for="warrantyExpiry">Garanti Bitiş Tarihi:</label>
+            <input type="date" id="warrantyExpiry" name="warrantyExpiry" required>
+            <button type="submit">Ekle</button>
+        </form>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Garanti Takip Uygulaması</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
